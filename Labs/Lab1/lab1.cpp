@@ -1,8 +1,8 @@
 /* 
- Title:   lab1.cpp 
- Author:  Nicholas Liverett
- Date:  August 29, 2024 
- Purpose: Convert Celsius to Fahrenheit 
+     Title:   lab1.cpp 
+     Author:  Nicholas Liverett
+     Date:  August 29, 2024 
+     Purpose: Convert Celsius to Fahrenheit 
 */ 
  
 #include <iostream> 
