@@ -24,7 +24,7 @@ int main()
 
     /* Loop vars setup */
     char saucer_incoming;
-    int saucer_distance, saucer_speed, i = 0;
+    int saucer_distance, saucer_speed, i = 0, saucers_blasted = 0;
     double saucer_intercept_time;
 
     /* Loop 10 times for shoot saucer game */
@@ -39,6 +39,7 @@ int main()
         /* Change output based on intercept time to audience. */
         if (saucer_intercept_time <= 5) {
             cout << "Blast it with foam cannons! It's zooming in too fast!";
+            saucers_blasted++;
         } else if (saucer_intercept_time <= 15) {
             cout << "Hold fire! Let's cheer for the saucer as it zooms by!";
         } else if (saucer_intercept_time > 15) {
@@ -63,8 +64,10 @@ int main()
 
         i++;
     }
-    /* Change end message based on amount of tracked saucers */
-    if (i < 7) {
+
+    cout << "You blasted " << saucers_blasted << " saucers out of the air! Great job!" << endl;
+    /* Change end message based on amount of blasted saucers */
+    if (saucers_blasted < 7) {
         cout << "What a peaceful show! Everyone left with smiles on their faces." << endl;
     } else {
         cout << "That was intense! The crowd loved it-10/10 entertainment!" << endl;

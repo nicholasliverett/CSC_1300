@@ -2,8 +2,10 @@
 	Given file: mod3b_messedup.cpp
 	
 	Module 3 In-Class Practice 2
-	
-	RENAME THIS FILE to mod3b.cpp
+	Title:   mod3b.cpp 
+    Author:  Nicholas Liverett
+    Date:  September 9, 2024 
+    Purpose: Participate in class 2
 */
 #include <iostream>
 #include <cmath>

@@ -1,5 +1,5 @@
 /* 
-    Title:   mod3.cpp 
+    Title:   mod3a.cpp 
     Author:  Nicholas Liverett
     Date:  September 9, 2024 
     Purpose: Participate in class
