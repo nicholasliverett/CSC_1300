@@ -10,34 +10,29 @@ using namespace std;
 
 int main()
 {	
-	int total = 0;
+	int total;
 	bool skip = false;
 	char response;
 	
-	do{
+	do {
 	total = 0;
 		//add every-other odd number from 1 to 100	
-		for(int num = 1; num < 100; num++)
-		{
-			if((num % 2) != 0)
-			{
-				if(skip == false)
-				{
+		for(int num = 1; num <= 100; num++) {
+			if((num % 2) != 0) {
+				if(skip == false) {
 					total += num;
 					skip = true;
-				}
-				else
+				}else
 					skip = false;
-			}
-			
+			}	
 		}
 			
-		cout << "\nThe total of adding every-other odd number from 1 to 100 is " << total << endl;
+		cout << "\nThe total of adding every-other odd number from " << "1 to 100 is " << total << endl;
 			 
-		cout << "\nWould you like to run again? (y or n)  ";
+		cout << "\nWould you like to run again? (y or n): ";
 		cin >> response;
-		
-	}while(response == 'y' || response == 'Y');
+	}
+	while(response == 'y' || response == 'Y');
 		
 	cout << endl;	
 	return 0;

@@ -1,7 +1,7 @@
 //while_given.cpp
 // mod5a In-Class Practice
 //Description : Generate random number between 70 and 770. Calculate sum of random numbers. 
-//              Ask user to guess the random number.
+//              Ask user to guess the random number. Ask user to keep going?
 using namespace std;
 #include<iostream>
 #include<time.h>
@@ -14,6 +14,7 @@ int main()
 	int guess=0; 	//guess will hold the user's guess
 	int low =7; 	//low is the lower limit for the random number generated
 	int high=77; 	//high is the upper limit for the random number generated
+	char userinput;
 	
 	//seed the random number generator
 	srand (time(0));
@@ -22,29 +23,34 @@ int main()
 		!!!!!!!!!!!!!!!!!!!!!!
 		generate a random number between the low & high range inclusively
 	*/
-	rnum = rand()%(high-low+1)+low;
-	
+	do {
+		rnum = rand()%(high-low+1)+low;
+		
 
-	cout << "\n\nGuess a number between " << low << " and " << high << ":  ";
-	cin >> guess;
-	
-	/*
-		!!!!!!!!!!!!!!!!!!!!!!!!!
-		Complete the while loop so that it will validate if the user entered 
-		a number in the valid range (7 to 77).  Both 7 & 77 are included in the valid range.
-	*/
-	while(guess < low || guess > high)
-	{
-		cout << "The number is not in the valid range!\n";
-		cout << "Guess a number between " << low << " and " << high << ":  ";
+		cout << "\n\nGuess a number between " << low << " and " << high << ":  ";
 		cin >> guess;
+		
+		/*
+			!!!!!!!!!!!!!!!!!!!!!!!!!
+			Complete the while loop so that it will validate if the user entered 
+			a number in the valid range (7 to 77).  Both 7 & 77 are included in the valid range.
+		*/
+		while(guess < low || guess > high)
+		{
+			cout << "The number is not in the valid range!\n";
+			cout << "Guess a number between " << low << " and " << high << ":  ";
+			cin >> guess;
+		}
+		
+		if(guess == rnum)
+			cout << "\n\nYou have gained the super power where skittles can shoot from your fingertips!\n\n";
+		else
+			cout << "\n\nYou get no super powers.  The random number was " << rnum << endl << endl;
+
+		cout << "Would you like to run the program again? (y/n): ";
+		cin >> userinput;
 	}
-	
-	if(guess == rnum)
-		cout << "\n\nYou have gained the super power where skittles can shoot from your fingertips!\n\n";
-	else
-		cout << "\n\nYou get no super powers.  The random number was " << rnum << endl << endl;
-	
+	while (userinput == 'y' || userinput == 'Y');
 	return 0;
 		
 }

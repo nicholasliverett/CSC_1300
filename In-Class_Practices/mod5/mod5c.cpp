@@ -1,7 +1,7 @@
 /*
 	Title:    mod5c.cpp
-	Author:   
-	Date:     
+	Author:   Nicholas Liverett
+	Date:     9/25/24
 	Purpose:  Practice for loops (in-class practice)
 */
 
@@ -15,7 +15,7 @@ int main()
 	int rnum = 0; 	//rnum holds the random number generated
 	int total;  	//total for the particular ability
 	int oddRoll;	//holds the number of times an ODD roll occurred
-	int rollNum;	//Number of times dice has been rolled for this ability
+	int numRoll;	//Number of times dice has been rolled for this ability
 	
 	
 	//seed the random number generator
@@ -39,24 +39,27 @@ int main()
 	//ADD ALL YOUR CODE BELOW 
 	//MAKE SURE YOU HAVE AT LEAST ONE FOR LOOP AND TWO LOOPS IN TOTAL.  
 	//USE THE PROVIDED VARIABLES THAT HAVE BEEN DEFINED
-	for (int i = 1; i <= 6; i++)
-	{
+	
+	for (int i=1; i<=6; i++) {
+
 		total = 0;
 		oddRoll = 0;
-		rollNum = 1;
-		while(total < 20 && oddRoll < 2)
-		{
-			rnum = (rand() % 6)+1;
-			cout << "roll " << rollNum << ": " << rnum << endl;
-			if(rnum % 2 != 0)
+		numRoll = 1;
+
+		while (oddRoll < 2 && numRoll < 20){
+			rnum = rand() % 6 + 1;
+			cout << "roll " << numRoll << ": " << rnum << endl;
+			if (rnum % 2 != 0)
 				oddRoll++;
 			total += rnum;
-			rollNum++;
+			numRoll++;
 		}
-		if(total > 20)
-			total = total - rnum;
+
+		if (total > 20)
+			total -= rnum;
 		cout << "***** Ability " << i << " score is " << total << endl;
-	}
+	}	
+	
 	cout << endl;
 	return 0;
 }

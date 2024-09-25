@@ -1,6 +1,7 @@
-//while_given.cpp
+// mod5a.cpp
+// Nicholas Liverett
 // mod5a In-Class Practice
-//Description : Generate random number between 70 and 770. Calculate sum of random numbers. 
+// Description : Generate random number between 70 and 770. Calculate sum of random numbers. 
 //              Ask user to guess the random number.
 using namespace std;
 #include<iostream>
@@ -22,6 +23,7 @@ int main()
 		!!!!!!!!!!!!!!!!!!!!!!
 		generate a random number between the low & high range inclusively
 	*/
+	rnum = rand() % (high-low+1) + low;
 	
 	
 
@@ -33,10 +35,11 @@ int main()
 		Complete the while loop so that it will validate if the user entered 
 		a number in the valid range (7 to 77).  Both 7 & 77 are included in the valid range.
 	*/
-	while()
+	while(guess > 77 || guess < 7)
 	{
 		cout << "The number is not in the valid range!\n";
 		cout << "Guess a number between " << low << " and " << high << ":  ";
+		cin >> guess;
 		
 	}
 	
