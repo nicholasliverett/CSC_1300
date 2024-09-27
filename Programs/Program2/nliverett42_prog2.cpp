@@ -60,8 +60,8 @@ int main()
             getline(cin, animal_name);
 
             // Add endl before appending animals with entry unless there are no other entries
-            animaldb.clear(); // Avoiding weird behavior when selling all animals making animals file empty
-            animaldb.seekg(0);
+            animaldb.clear(); // Avoiding weird behavior when animals is empty
+            animaldb.seekg(0); // endl then entry to keep animals consistent, one entry for one line, no extra lines
             getline(animaldb, entry);
             if (entry.find(':') != string::npos)
                 animaldb.clear(); // I hate c++
