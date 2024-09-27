@@ -1,0 +1,5 @@
+Dog:Jack
+Pig:Wilber
+Guinea Pig:Chunk
+Dog:Scout
+Plymouth Rock Chicken:Lunch
