@@ -42,7 +42,7 @@ int main()
 
         // Validate int input and requery if invalid
         while (menu_input < 1 || menu_input > 4) {
-            cin.clear();
+            cin.clear(); // Lovely
             cin.ignore(); 
             cout << "Oops! That option doesn't exist. Please choose 1, 2, 3, or 4.\n";
             cout << "Please choose an option: ";
@@ -60,7 +60,7 @@ int main()
             getline(cin, animal_name);
 
             // Add endl before appending animals with entry unless there are no other entries
-            animaldb.clear(); // Avoiding weird behavior when animals is empty
+            animaldb.clear(); // Avoiding weird behavior when animals.txt is empty
             animaldb.seekg(0); // endl then entry to keep animals consistent, one entry for one line, no extra lines
             getline(animaldb, entry);
             if (entry.find(':') != string::npos)
@@ -78,7 +78,7 @@ int main()
 
             // Output animals in store - could be a function
             cout << "\nAnimals currently in the pet store:\n";
-            animaldb.clear();
+            animaldb.clear(); // mmhmm..
             animaldb.seekg(0);
             int i = 1;
             while (getline(animaldb, entry) ) {
@@ -92,7 +92,7 @@ int main()
         } else if (menu_input == 3) {
 
             // Makes sure there are animals to sell
-            animaldb.clear();
+            animaldb.clear(); // for sure
             animaldb.seekg(0);
             getline(animaldb, entry);
             if (entry.find(':') == string::npos) {
@@ -109,7 +109,7 @@ int main()
                 // Output animals in store - should be a function
                 cout << "\nAnimals currently in the pet store:\n";
                 lines = 0;
-                animaldb.clear();
+                animaldb.clear(); // for sure for sure
                 animaldb.seekg(0);
                 int i = 1;
                 while (getline(animaldb, entry) ) {
@@ -131,14 +131,14 @@ int main()
                 }
 
                 // Find entry to be sold/removed
-                animaldb.clear();
+                animaldb.clear(); // No, right...
                 animaldb.seekg(0);
                 for (int n=0; n<sell_input; n++) {
                     getline(animaldb, entry_delete);
                 }
 
                 // Output new list to temp file
-                animaldb.clear();
+                animaldb.clear(); // no fs
                 animaldb.seekg(0);
                 i = 0;
                 while (getline(animaldb,entry)) {
