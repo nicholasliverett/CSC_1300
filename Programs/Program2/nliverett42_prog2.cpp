@@ -29,7 +29,7 @@ int main()
             return 1;
         }
         
-        //Output menu
+        // Output menu
         cout << "Choose from the following options:\n";
         cout << "1. Add a new animal\n";
         cout << "2. Display all animals\n";
