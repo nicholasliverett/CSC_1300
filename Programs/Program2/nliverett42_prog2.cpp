@@ -2,7 +2,7 @@
      Title:   nliverett42.cpp 
      Author:  Nicholas Liverett
      Date:    9/27/24 
-     Purpose: Basic Pet Store Management System, and discovering why arrays and maps are a thing
+     Purpose: Basic Pet Store Management System, discovering why maps are a thing, and how easy it is to overcomplicate things
 */ 
  
 #include <iostream>
@@ -15,9 +15,14 @@ int main()
 {
     fstream animaldb;
     ofstream temp;
-    int menu_input, sell_input, lines;
+    int menu_input, sell_input, num_of_lines, i;
     string animal_type, animal_name, entry, entry_delete;
 
+    /*
+    
+    Assuming animals.txt is a file with no extra lines, i.e. no empty lines at the end of all the entries/lines
+
+    */
 
     cout << "\nWelcome to the Pet Store Management System!\n\n";
 
@@ -43,7 +48,7 @@ int main()
         // Validate int input and requery if invalid
         while (menu_input < 1 || menu_input > 4) {
             cin.clear(); // Lovely
-            cin.ignore(); 
+            cin.ignore(); // Avoid infinite loop if you input a non character, such as a string, 'Cat' or whatever
             cout << "Oops! That option doesn't exist. Please choose 1, 2, 3, or 4.\n";
             cout << "Please choose an option: ";
             cin >> menu_input;
@@ -59,13 +64,14 @@ int main()
             cout << "Enter the animal's name: ";
             getline(cin, animal_name);
 
-            // Add endl before appending animals with entry unless there are no other entries
-            animaldb.clear(); // Avoiding weird behavior when animals.txt is empty
-            animaldb.seekg(0); // endl then entry to keep animals consistent, one entry for one line, no extra lines
+            // Add endl before  entry unless file is empty
+            animaldb.clear(); // I don't like this grandpa
+            animaldb.seekg(0); 
             getline(animaldb, entry);
-            if (entry.find(':') != string::npos)
+             if (entry.find(':') != string::npos) { // 
                 animaldb.clear(); // I hate c++
                 animaldb << endl;
+            }
             
             // Append animals.txt with new animal entry
             animaldb.clear(); // right...
@@ -80,7 +86,7 @@ int main()
             cout << "\nAnimals currently in the pet store:\n";
             animaldb.clear(); // mmhmm..
             animaldb.seekg(0);
-            int i = 1;
+            i = 1;
             while (getline(animaldb, entry) ) {
                 // Output name and animal type based on ":", create substr yada yada
                 cout << i << ". " << entry.substr(0,entry.find(":")) << " named " << entry.substr(entry.find(":")+1) << endl;
@@ -99,7 +105,7 @@ int main()
                 cout << "There are no animals to sell!\n\n";
             } else {
 
-                // Open and validate temp - why not use a map for this whole thing
+                // Open and validate temp - why not use a map :(
                 temp.open("temp.txt"); 
                 if (!temp.is_open()) { 
                     cout << "Error opening file."; 
@@ -108,15 +114,15 @@ int main()
 
                 // Output animals in store - should be a function
                 cout << "\nAnimals currently in the pet store:\n";
-                lines = 0;
+                num_of_lines = 0;
                 animaldb.clear(); // for sure for sure
                 animaldb.seekg(0);
-                int i = 1;
+                i = 1;
                 while (getline(animaldb, entry) ) {
                     // Output name and animal type based on ":", create substr yada yada
                     cout << i << ". " << entry.substr(0,entry.find(":")) << " named " << entry.substr(entry.find(":")+1) << endl;
                     i++;
-                    lines++;
+                    num_of_lines++;
                 }
 
                 // Query user for sold animal
@@ -124,29 +130,35 @@ int main()
                 cin >> sell_input;
 
                 // Validate user input
-                while (sell_input < 1 || sell_input > lines) {
-                    cout << "Oops! There is no animal with number " << sell_input << ". Select an animal between 1 and " << lines << ".\n";
+                while (sell_input < 1 || sell_input > num_of_lines) {
+                    cout << "Oops! There is no animal with number " << sell_input << ". Select an animal between 1 and " << num_of_lines << ".\n";
                     cout << "Enter the number of the animal that sold: ";
                     cin >> sell_input;
                 }
 
-                // Find entry to be sold/removed
-                animaldb.clear(); // No, right...
-                animaldb.seekg(0);
-                for (int n=0; n<sell_input; n++) {
-                    getline(animaldb, entry_delete);
-                }
-
-                // Output new list to temp file
+                // Output new list, without entry to be sold, to temp file
                 animaldb.clear(); // no fs
                 animaldb.seekg(0);
-                i = 0;
+                i = 1;
                 while (getline(animaldb,entry)) {
-                    if (entry != entry_delete) {
+                    if (i != sell_input) {
                         temp << entry;
-                        if (i != lines-1)
+
+                        /*
+                        Do not output an endl if:
+                        A) We are outputting the last entry (doing so would result in an empty line at the end of the file)
+                        or
+                        B) The entry to be deleted is the last one and we are outputting the "new" last entry (or the old second to last entry)
+                        */
+                        if (num_of_lines == sell_input) {
+                            if (i != sell_input-1) {
+                                temp << endl;
+                            }
+                        } else if (i != num_of_lines) {
                             temp << endl;
+                        }
                     }
+                    cout << i << " " << num_of_lines << " " << sell_input << endl;
                     i++;
                 }
                 cout << "The animal has been removed from the file.\n\n";
