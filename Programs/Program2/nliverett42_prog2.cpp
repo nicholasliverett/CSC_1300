@@ -141,20 +141,11 @@ int main()
                 animaldb.seekg(0);
                 i = 1;
                 while (getline(animaldb,entry)) {
-                    if (i != sell_input) {
+                    if (i != sell_input) { // Output each line to temp that is not the line to be removed/sold
                         temp << entry;
-
-                        /*
-                        Do not output an endl if:
-                        A) We are outputting the last entry (doing so would result in an empty line at the end of the file)
-                        or
-                        B) The entry to be deleted is the last one and we are outputting the "new" last entry (or the old second to last entry)
-                        */
-                        if (num_of_lines == sell_input) {
-                            if (i != sell_input-1) {
-                                temp << endl;
-                            }
-                        } else if (i != num_of_lines) {
+                        
+                        // Output an endl, unless we are outputing the last line, or the line to be deleted is the last line and we are outputting the second to last line
+                        if (i != num_of_lines && ((num_of_lines == sell_input && i != sell_input-1) || num_of_lines != sell_input) ) {
                             temp << endl;
                         }
                     }
@@ -162,7 +153,6 @@ int main()
                     i++;
                 }
                 cout << "The animal has been removed from the file.\n\n";
-
                 animaldb.close();
                 temp.close();
 
@@ -170,9 +160,7 @@ int main()
                 remove("animals.txt");
                 rename("temp.txt", "animals.txt");
             }
-
         }
-
     } while (menu_input != 4);
 
     cout << "\nGoodbye!\n\n";
