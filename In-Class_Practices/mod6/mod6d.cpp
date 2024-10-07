@@ -35,7 +35,6 @@ int main()
         // Output movie data
         if (i % 3 == 0)
             cout << " " << i/3 << ") Title: " << title << ", Year: " << year << ", Rotten Tomatoes Score: " << rating << "\n";
-        //movie_file.ignore();
         i++;
     }
     cout << endl;
