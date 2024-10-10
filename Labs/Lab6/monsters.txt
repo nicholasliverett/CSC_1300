@@ -1,0 +1,1 @@
+Monster 1, year 1: 8 toys.Monster 1, year 2: 19 toys.Monster 1, year 3: 4 toys.Monster 2, year 1: 6 toys.Monster 2, year 2: 21 toys.Monster 2, year 3: 58 toys.Monster 3, year 1: 63 toys.Monster 3, year 2: 12 toys.Monster 3, year 3: 8 toys.
