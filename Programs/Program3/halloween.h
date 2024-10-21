@@ -1,13 +1,15 @@
-#ifndef HALLOWEEN_sH
+#ifndef HALLOWEEN_H
 #define HALLOWEEN_H
 
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
+// Declare funcs
 void print_menu();
-void manage_guests_or_activities(string list[6], int idk);
-void print_food(string foods[6], int amount[6]);
-void save_to_file(string guests[6], int idk, string activities[6], int idk2, string food[6], int amount[6]);
+int manage_guests_or_activities(string list[], size_t& list_size, int gues_act);
+void print_food(string food[], int amount[]);
+void save_to_file(string guests[], size_t guests_size, string activities[], size_t activities_size, string food[], int amount[]);
 
 #endif
