@@ -42,8 +42,8 @@ void print_menu() {
     cout << "1. Manage Guest List\n";
     cout << "2. Manage Activities\n";
     cout << "3. Check Food\n";
-    cout << "4. Save Part to File\n";
-    cout << "5. Exit Part Planning\n    ";
+    cout << "4. Save Party to File\n";
+    cout << "5. Exit Party Planning\n    ";
 }
 
 int manage_guests_or_activities(string list[], size_t& list_size, int gues_act) {
@@ -69,8 +69,8 @@ int manage_guests_or_activities(string list[], size_t& list_size, int gues_act) 
         cin >> menu_choice;
 
         if (menu_choice == 1) {
-            // Check if last entry in array is empty
-            if (!list[5].empty())
+            // Check if array full
+            if (list_size == 6)
                 return -1; // "Throw" error
 
             // Query for name to add
@@ -84,7 +84,7 @@ int manage_guests_or_activities(string list[], size_t& list_size, int gues_act) 
             
         } else if (menu_choice == 2) {
             // Check if array empty
-            if (list_size==0)
+            if (list_size == 0)
                 return -1; // "Throw" error
             
             // Query for guest/act to remove
@@ -101,7 +101,7 @@ int manage_guests_or_activities(string list[], size_t& list_size, int gues_act) 
             
         } else if (menu_choice == 3) {
             // Check if array empty
-            if (list_size==0)
+            if (list_size == 0)
                 return -1; // "Throw" error
 
             // Query for guest/act to modify and what to modfiy with
