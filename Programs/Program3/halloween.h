@@ -8,8 +8,8 @@ using namespace std;
 
 // Declare funcs
 void print_menu();
-int manage_guests_or_activities(string list[], size_t& list_size, int gues_act);
-void print_food(string food[], int amount[]);
-void save_to_file(string guests[], size_t guests_size, string activities[], size_t activities_size, string food[], int amount[]);
+int manage_guests_or_activities(string[], size_t&, int);
+void print_food(string[], int[]);
+void save_to_file(string[], size_t, string[], size_t, string[], int[]);
 
 #endif
