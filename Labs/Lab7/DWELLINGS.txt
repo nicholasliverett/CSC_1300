@@ -1,0 +1,15 @@
+Cottage
+Cabin
+Shack
+Mansion
+Apartment
+House
+Castle
+Hut
+Hobbit Hole
+Cave
+Palace
+Dungeon
+Loft
+Townhouse
+Treehouse
