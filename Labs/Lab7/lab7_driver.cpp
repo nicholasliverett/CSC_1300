@@ -105,7 +105,7 @@ int main()
 			cout << place3 << " as a " << jobTitle3 << " making ";
 
 		randomInt = generate_random_int(0, 2);//generate a random number between 1 and 3
-
+		// Integrate rand with array
 		cout << "$" << sals[randomInt] << " a year.\n";		
 		
 		cout << "\nWould you like to play Future Predictor again? (y/n)";

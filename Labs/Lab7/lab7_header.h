@@ -17,7 +17,7 @@ using namespace std;
 
 // Declare funcs
 int generate_random_int(int, int);
-void get_num_children(int[]);
-void get_salary(double[]);
+void get_num_children(int []);
+void get_salary(double []);
 
 #endif
