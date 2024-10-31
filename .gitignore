@@ -2,3 +2,4 @@ wiener/
 .vscode/
 *.exe
 *.zip
+/Labs/Lab8/json
