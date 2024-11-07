@@ -1,0 +1,7 @@
+Cores/Processors: 16
+Sequential Comp Time: 1.15
+Parallel Comp Time: 0.21
+1000 Threads Comp Time: 3.55
+2 Threads Comp Time: 0.75
+No. Graphics are embeded, running other programs-
+bigger is not always better.
