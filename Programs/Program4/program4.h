@@ -1,7 +1,7 @@
 /* 
      Title:   program4.h 
      Author:  Nicholas Liverett
-     Date:    11/13/24 
+     Date:    11/15/24 
      Purpose: Creature fight game - header
 */ 
 #ifndef PROGRAM4_H

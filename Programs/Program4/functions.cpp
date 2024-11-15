@@ -1,24 +1,17 @@
-/*****************************************************************
- *****************************************************************
+/*
 	Title: 			functions.cpp
 	Authors: 		April Crockett and Nicholas Liverett
 	Date Created: 	11/1/2024
-	Last Updateed: 	11/13/2024 (KEEP UPDATING THIS DATE AS YOU WORK ON THIS FILE)
+	Last Updated: 	11/15/2024 
 	Purpose: 		Creature Fight Game - functions
-******************************************************************
-******************************************************************/
+*/
 
 #include "program4.h"
 
+//self-explanatory
 string lineOfStars = "********************************************************************************";
 
-/******************************************************************
-	Function name: fight()
-	Function purpose:
-	
-		The fight function will allow two dinosaurs to fight.
-		The user gets to select the two dinos. 
-*******************************************************************/
+//allows user to select two creatures to "fight"
 int fight(int numCreatures, Creatures* creatureList)
 {
 	int random, first, second, numRounds;
@@ -144,16 +137,13 @@ int fight(int numCreatures, Creatures* creatureList)
 	return numCreatures;
 }//end of fight()
 
-/******************************************************************
-	Function name: calculateModifier()
-	Function purpose:
-	
+/*
 		The calculateModifier function will accept the index value
 		of the creature that will have its hit points modified
 		by the special bonus modifier. This function also accepts
 		the creature array and an integer that is passed by reference
 		that will hold the updated hit points for this creature
-*******************************************************************/
+*/
 void calculateModifier(int i, Creatures* creatureList, int& fHit)
 {
 	int randomNum = rand()%(11-7+1)+7;
@@ -168,14 +158,17 @@ void calculateModifier(int i, Creatures* creatureList, int& fHit)
 int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_arr) {
 	int file_or_man, i=num_creatures, count=0;
 	string file_name, temp;
+
 	cout << endl << lineOfStars << endl;
 	cout << "---------- ENTER CREATURES! ----------\n";
 
+	//ensure creatures_arr is not full
 	if (num_creatures == max_creatures) {
 		cout << "\nSorry! You are already at the maximum capacity of " << max_creatures << " creatures.\n";
 		return num_creatures;
 	}
 
+	//query for file or manual input and validates input
 	cout << "Would you like to (1)Load my creatures from a text file or (2)Enter one creature manually?\n\n";
 	cout << "CHOOSE 1 or 2: ";
 	while (!(cin >> file_or_man) || (file_or_man != 1 && file_or_man != 2)) {
@@ -184,40 +177,43 @@ int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_ar
         cout << "Wrong. Try Again (1-2): ";
     }
 
+	//file input(1) or manual input(2)
 	if (file_or_man == 1) {
 		cout << "What is the name of the file with your list of creatures? (ex: filename.txt)\n";
 		cout << "FILENAME: ";
 		cin >> file_name;
 
+		//end if cannot open file
 		ifstream creatures_file(file_name);
 		if (!creatures_file.is_open()) {
 			cout << "Could not open file.\n";
 			return num_creatures;
 		}
 		
+		//while getline hell to read file, endif arr maxxed out
 		while(getline(creatures_file, temp, '#') && i < max_creatures) {
 			//name ^
 			creatures_arr[i].name = temp;
 			//description
 			getline(creatures_file, creatures_arr[i].description, '#');
-			//length
+			//length - string to double
 			getline(creatures_file, temp, '#');
 			creatures_arr[i].length = stof(temp);
-			//height
+			//height - string to double
 			getline(creatures_file, temp, '#');
 			creatures_arr[i].height = stof(temp);
 			//location
 			getline(creatures_file, creatures_arr[i].location, '#');
-			//danger
+			//danger - string to bool
 			getline(creatures_file, temp, '#');
 			if (temp == "0")
 				creatures_arr[i].danger = false;
 			else if (temp == "1")
 				creatures_arr[i].danger = true;
-			//damage
+			//damage - string to int
 			getline(creatures_file, temp, '#');
 			creatures_arr[i].stats.dmg = stoi(temp);
-			//health
+			//health - string to int
 			getline(creatures_file, temp, '#');
 			creatures_arr[i].stats.hp = stoi(temp);
 			//special mod 
@@ -236,6 +232,8 @@ int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_ar
 		
 	} else if (file_or_man == 2) {
 		char add_more;
+
+		//loop through as long as user wants to add more and not maxxed out
 		do {
 			i = num_creatures;
 			//name
@@ -255,7 +253,7 @@ int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_ar
 			cout << "LOCATION: ";
 			cin.ignore();
 			getline(cin, creatures_arr[i].location);
-			//danger
+			//danger - bools
 			cout << "IS IT A DANGEROUS CREATURE (y or n): ";
 			cin >> temp;
 			if (temp == "y")
@@ -268,7 +266,7 @@ int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_ar
 			//hp
 			cout << "HEALTH POINTS: ";
 			cin >> creatures_arr[i].stats.hp;
-			//special if y set to 1# | if n set to 00
+			//special if yes set to 1# | if no set to 00
 			cout << "HIT SPECIAL MODIFIER? (y or n): ";
 			cin >> temp;
 			if (temp == "y") {
@@ -284,7 +282,8 @@ int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_ar
 
 			num_creatures++;
 			i++;
-
+			
+			//query to add more aslong as not maxxed out
 			if (i < max_creatures) {
 				cout << "Want to add more creatures (y or n)? ";
 				while (!(cin >> add_more) || (add_more != 'y' && add_more != 'n')) {
@@ -317,11 +316,13 @@ int deleteCreature(int num_creatures, Creatures* creatures_arr) {
 	for (int i=0;i<num_creatures;i++) 
 		cout << creatures_arr[i].name << endl;
 	
+	//query for removie
 	cout << "\nWhat creature do you wish to remove?\n";
 	cout << "CREATURE NAME: ";
 	cin.ignore();
 	getline(cin, removie);
 
+	//attempt to remove via moveArrayElements func
 	if(moveArrayElements(removie, num_creatures, creatures_arr)) {
 		cout << endl << "You have removed " << removie << ".\n";
 		num_creatures--;
@@ -331,9 +332,12 @@ int deleteCreature(int num_creatures, Creatures* creatures_arr) {
 	return num_creatures;
 }
 
+//"moves" elements - removes them
 bool moveArrayElements(string removie, int num_creatures, Creatures* creatures_arr) {
 	bool result;
 	int removie_index;
+
+	//find index of removie
 	for (int i=0;i<num_creatures;i++) {
 		if (creatures_arr[i].name == removie) {
 			result = true;
@@ -341,15 +345,17 @@ bool moveArrayElements(string removie, int num_creatures, Creatures* creatures_a
 		}
 	}
 
+	//return false  if removie not found
 	if (result == false)
 		return false;
 
-	//remove
+	//"shift" everything "left" 1
 	for (int i=removie_index;i<num_creatures-1;i++) 
 		creatures_arr[i] = creatures_arr[i+1];
 	return true;
 }
 
+//allows user to print list of creatures
 void printCreatures(int num_creatures, Creatures* creatures_arr) {
 	string description;
 	int j;
@@ -357,17 +363,20 @@ void printCreatures(int num_creatures, Creatures* creatures_arr) {
 	cout << endl << lineOfStars << endl;
 	cout << "---------- PRINT CREATURES ----------\n";
 	
+	//don't print if empty list
 	if (num_creatures == 0)
 		cout << "\nOh no! There are no creatures in the arena!\n";
 	else {
 		cout << "\nHere is a detailed list of all the creatures who are eligible to fight:\n\n";
+
+		//loop through to print out creatures
 		for (int i=0;i<num_creatures;i++) {
 			cout << "---------- CREATURE " << i+1 << " ----------\n";
 			cout << "Name:\t\t" << creatures_arr[i].name << endl;
-			//cout << "Description:\n\t"<< creatures_arr[i].description << endl;
+			//description - hell
 			description = creatures_arr[i].description;
-			j = 1;
-			for (int i=0;i<description.length();i++) {
+			//add a endline and tab if a space and line is beyond 60 chars
+			for (int i=0,j=1;i<description.length();i++) { //j is incremented for each endline so after it is looking past 120 chars etc.
 				if (description.at(i) == ' ' && i >= (60 * j)) {
 					description.insert(i+1, "\n\t");
 					j++;
@@ -377,14 +386,14 @@ void printCreatures(int num_creatures, Creatures* creatures_arr) {
 			cout << "Length:\t\t"<< creatures_arr[i].length << " feet\n";
 			cout << "Height:\t\t"<< creatures_arr[i].height << " feet\n";
 			cout << "Location:\t"<< creatures_arr[i].location << endl;
-			cout << "Dangerous?\t";
+			cout << "Dangerous?\t"; // yes if danger | no if no danger
 			if (creatures_arr[i].danger == true)
 				cout << "yes\n";
 			else if (creatures_arr[i].danger == false)
 				cout << "no\n";
 			cout << "Hit Points:\t"<< creatures_arr[i].stats.dmg << endl;
 			cout << "Health Points:\t"<< creatures_arr[i].stats.hp << endl;
-			cout << "Special Bonus:\t";
+			cout << "Special Bonus:\t"; // change output based on 1st special element
 			if (creatures_arr[i].stats.special[0] == '0')
 				cout << "No hit modifier\n\n";
 			else if (creatures_arr[i].stats.special[0] == '1')
@@ -394,20 +403,24 @@ void printCreatures(int num_creatures, Creatures* creatures_arr) {
 
 }
 
+//allows user to print stats of creatures in neat table
 void printStats(int num_creatures, Creatures* creatures_arr) {
 	
 	cout << endl << lineOfStars << endl;
 	cout << "---------- PRINT CREATURE STATISTICS ----------\n";
 
+	//make sure creature list/arr is not empty
 	if (num_creatures == 0)
 		cout << "\nOh no! There are no creatures in the arean!\n";
 	else {
-		cout << "Here are the current stats of each creature:\n\n";
+		cout << "\nHere are the current stats of each creature:\n\n";
+		//output top of table
 		cout << setw(25) << left << "CREATURE" << right << "HIT PTS" << setw(12) << "HEALTH PTS" << "  SPECIAL BONUS" << endl;
-		cout << "--------------------------------------------------------------------------------\n";
+		cout << "--------------------------------------------------------------------------------\n"; //i'm a rat
 		for (int i=0;i<num_creatures;i++) {
+			//output data of each creature
 			cout << setw(25) << left << creatures_arr[i].name << setw(7) << right << creatures_arr[i].stats.dmg << setw(12) << creatures_arr[i].stats.hp;
-			if (creatures_arr[i].stats.special[0] == '0')
+			if (creatures_arr[i].stats.special[0] == '0') //change output based on 1st element of special
 				cout << "  No hit modifier\n";
 			else if (creatures_arr[i].stats.special[0] == '1')
 				cout << "  Hit modifier of " << creatures_arr[i].stats.special[1] << endl;
@@ -415,18 +428,21 @@ void printStats(int num_creatures, Creatures* creatures_arr) {
 	}
 }
 
+//allows user to save creatures list/arr to a file
 void saveCreaturesToFile(int num_creatures, Creatures* creatures_arr) {
 	string file_name;
 
 	cout << endl << lineOfStars << endl;
 	cout << "---------- SAVE CREATURES TO FILE ----------\n\n";
 
+	//query for filename to create output file
 	cout << "What is the name of the file you want to save your creatures to?\n";
 	cout << "FILENAME: ";
 	cin >> file_name;
 	ofstream creatures_file;
 	creatures_file.open(file_name);
 
+	//loop through arr and output to file in weird delimiter format
 	for (int i=0;i<num_creatures;i++) {
 		cout << endl << creatures_arr[i].name << " was saved to file.";
 		creatures_file << creatures_arr[i].name << "#" << creatures_arr[i].description << "#"

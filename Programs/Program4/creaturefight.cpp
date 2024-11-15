@@ -1,7 +1,7 @@
 /* 
      Title:   creaturefight.cpp 
      Author:  Nicholas Liverett
-     Date:    11/13/24 
+     Date:    11/15/24 
      Purpose: Creature fight game - main
 */ 
  
@@ -13,21 +13,26 @@ int main()
     int num_creatures=0, main_menu, max_creatures;
     char save_file;
     string file_name, lineOfStars = "********************************************************************************";
+
     cout << endl << lineOfStars << endl;
     cout << setw(30) << "CREATURE FIGHT!\n";
     cout << lineOfStars << endl;
 
+    //query for arr max size and validate input
     cout << "\nWhat is the maximum number of creatures that can fit in your arena?\n";
     cout << "MAX NUM OF CREATURES (positive int.): ";
     while (!(cin >> max_creatures) || max_creatures <= 0) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Wrong. Try Again (1-6): ";
+        cout << "Wrong. Try Again (positive int.): ";
     }
 
+    //dynamically allocate creatures arr
     Creatures *creatures_arr = new Creatures[max_creatures];
 
+    //main menu loop
     do {
+        //output menu and query for user decision and validate
         cout << "\nWhat would you like to do?\n";
         cout << "\t1. Enter some creatures\n";
         cout << "\t2. Fight!\n";
@@ -39,10 +44,10 @@ int main()
         while (!(cin >> main_menu) || main_menu <= 0) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Wrong. Try Again: ";
+            cout << "Wrong. Try Again (1-6): ";
         }
 
-        //branching
+        //branching menu choice
         if (main_menu == 1)
             num_creatures = enterCreatures(num_creatures, max_creatures, creatures_arr);
         else if (main_menu == 2)
@@ -56,16 +61,19 @@ int main()
         
     } while (main_menu != 6);
 
+    //query user for output file and validate choice
     cout << "Would you like to save your creature list to a file? (y/n) ";
     while (!(cin >> save_file) || (save_file != 'y' && save_file != 'n')) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Wrong. Try Again (y/n): ";
     }
+    //save file
     if (save_file == 'y')
         saveCreaturesToFile(num_creatures, creatures_arr);
 
-    cout << "\nGOODBYE\n\n";
+    //bye bye
+    cout << "\nGOODBYE!\n\n";
 
 
     return 0; 
