@@ -351,6 +351,8 @@ bool moveArrayElements(string removie, int num_creatures, Creatures* creatures_a
 }
 
 void printCreatures(int num_creatures, Creatures* creatures_arr) {
+	string description;
+	int j;
 
 	cout << endl << lineOfStars << endl;
 	cout << "---------- PRINT CREATURES ----------\n";
@@ -362,9 +364,18 @@ void printCreatures(int num_creatures, Creatures* creatures_arr) {
 		for (int i=0;i<num_creatures;i++) {
 			cout << "---------- CREATURE " << i+1 << " ----------\n";
 			cout << "Name:\t\t" << creatures_arr[i].name << endl;
-			cout << "Description:\n\t"<< creatures_arr[i].description << endl;
-			cout << "Length:\t\t"<< creatures_arr[i].length << endl;
-			cout << "Height:\t\t"<< creatures_arr[i].height << endl;
+			//cout << "Description:\n\t"<< creatures_arr[i].description << endl;
+			description = creatures_arr[i].description;
+			j = 1;
+			for (int i=0;i<description.length();i++) {
+				if (description.at(i) == ' ' && i >= (60 * j)) {
+					description.insert(i+1, "\n\t");
+					j++;
+				}
+			}
+			cout << "Description:\n\t" << description << endl << endl;
+			cout << "Length:\t\t"<< creatures_arr[i].length << " feet\n";
+			cout << "Height:\t\t"<< creatures_arr[i].height << " feet\n";
 			cout << "Location:\t"<< creatures_arr[i].location << endl;
 			cout << "Dangerous?\t";
 			if (creatures_arr[i].danger == true)
