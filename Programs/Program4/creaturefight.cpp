@@ -75,6 +75,6 @@ int main()
     //bye bye
     cout << "\nGOODBYE!\n\n";
 
-
+    delete [] creatures_arr;
     return 0; 
 } 
