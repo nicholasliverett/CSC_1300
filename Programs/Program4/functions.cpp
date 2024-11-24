@@ -235,7 +235,6 @@ int enterCreatures(int num_creatures, int max_creatures, Creatures* creatures_ar
 
 		//loop through as long as user wants to add more and not maxxed out
 		do {
-			i = num_creatures;
 			//name
 			cout << "\nNAME: ";
 			cin.ignore();
