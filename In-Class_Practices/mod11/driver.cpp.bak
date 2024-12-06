@@ -1,0 +1,46 @@
+/* 
+     Title:   IceCream.cpp
+     Author:  Nicholas Liverett
+     Date:    12/2/24 
+     Purpose: In class practice 3 - driver
+*/ 
+
+#include "IceCream.h"
+
+int main() {
+    string temp;
+    double price;
+
+    IceCream cream;
+
+    cout << "\nPrinting the first Ice Cream before attributes are set.\n";
+    cream.print_ice_cream();
+
+    cream.get_cone("waffle");
+    cream.get_flavor("chocolate");
+    cream.get_topping("m&m");
+    cream.get_price(3.99);
+
+    cout << "\nPrinting the first Ice Cream after calling mutator\n";
+    cream.print_ice_cream();
+
+    cout << "\nEnter your favorite ice cream:\n";
+    cout << "CONE: ";
+    getline(cin, temp);
+    cream.get_cone(temp);
+    cout << "FLAVOR: ";
+    getline(cin, temp);
+    cream.get_flavor(temp);
+    cout << "TOPPING: ";
+    getline(cin, temp);
+    cream.get_topping(temp);
+    cout << "PRICE: $";
+    cin >> price;
+    cream.get_price(price);
+
+    cout << "\nPrinting the Second Ice Cream:\n";
+    cream.print_ice_cream();
+
+
+    return 0;
+}
